@@ -13,7 +13,7 @@ app.use(express.static('public'));
 
 //api routes
 app.get('/notes', (req, res) => {
-  res.sendFile(__dirname + '/public/notes.html');
+  res.sendFile(path.join(__dirname + '/public/notes.html'));
 });
 
 //create apis
@@ -27,8 +27,8 @@ app.get('/api/notes', (req, res) => {
 app.post('/api/notes', (req, res) => {
   console.log(req.body);
   var newNote = req.body;
-  res.sendFile(path.join(__dirname, '/db/db.json'));
-  fs.readFile('/db/db.json', 'utf-8', (err, data) => {
+  res.sendFile(path.join(__dirname, './db/db.json'));
+  fs.readFile('./db/db.json', 'utf-8', (err, data) => {
     if (err) throw err;
     let newTask = JSON.parse(data);
     newTask.push(newNote);
@@ -41,7 +41,7 @@ app.post('/api/notes', (req, res) => {
 });
 
 app.get('*', (req, res) => {
-  res.sendFile(__dirname + '/public/index.html');
+  res.sendFile(path.join(__dirname + '/public/index.html'));
 });
 
 app.listen(3001, () => {
